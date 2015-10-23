@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Library.Models {
-    public class Book {
+namespace Library.Models 
+{
+    public class Book 
+    {
         [Key]
         public int Id { get; set; }
         [Required]

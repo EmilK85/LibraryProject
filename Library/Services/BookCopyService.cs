@@ -1,0 +1,25 @@
+﻿using Library.Models;
+using Library.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Library.Services
+{
+    class BookCopyService
+    {
+        BookCopyRepository _bookCopyRepository;
+
+        public BookCopyService(RepositoryFactory repoFactory)
+        {
+            _bookCopyRepository = repoFactory.GetBookCopyRepository();
+        }
+
+        public IEnumerable<BookCopy> All()
+        {
+            return _bookCopyRepository.All();
+        } 
+    }
+}
