@@ -17,6 +17,8 @@ namespace Library.Repositories
 
         public void Add(Loan item)
         {
+            _context.Loans.Add(item);
+            _context.SaveChanges();
         }
 
         public void Remove(Loan item)

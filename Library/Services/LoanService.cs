@@ -24,5 +24,10 @@ namespace Library.Services
         {
             return _loanRepository.All();
         }
+
+        public void Add(Loan item)
+        {
+            _loanRepository.Add(item);
+        }
     }
 }

@@ -23,5 +23,10 @@ namespace Library.Services
         {
             return _memberRepository.All();
         }
+
+        public void Add(Member item)
+        {
+            _memberRepository.Add(item);
+        }
     }
 }

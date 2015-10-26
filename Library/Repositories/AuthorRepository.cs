@@ -9,7 +9,6 @@ namespace Library.Repositories
     public class AuthorRepository : IRepository<Author, int>
     {
         LibraryContext _context;
-        string love;
 
         public AuthorRepository (LibraryContext ctx)
         {
@@ -18,27 +17,39 @@ namespace Library.Repositories
 
         public void Add(Author item)
         {
-            throw new NotImplementedException();
+            _context.Authors.Add(item);
+            _context.SaveChanges();
         }
 
         public void Remove(Author item)
         {
-            throw new NotImplementedException();
         }
 
         public Author Find(int id)
         {
-            throw new NotImplementedException();        
+            return _context.Authors.ElementAt(0);      
         }
 
         public void Edit(Author item)
         {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<Author> All()
         {
             return _context.Authors.ToList();
+        }
+
+        public List<Book> booksByAuthor(string name)
+        {
+            List<Book> bList = new List<Book>();
+            foreach(Author a in _context.Authors)
+            {
+                if(a.Name == name)
+                {
+                    bList = a.books;
+                }
+            }
+            return bList;
         }
     }
 }

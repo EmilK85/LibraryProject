@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Services
 {
-    class BookCopyService
+    class BookCopyService: IService
     {
         BookCopyRepository _bookCopyRepository;
 
@@ -20,6 +20,18 @@ namespace Library.Services
         public IEnumerable<BookCopy> All()
         {
             return _bookCopyRepository.All();
-        } 
+        }
+
+        public event EventHandler Updated;
+
+        public void Add(BookCopy item)
+        {
+            _bookCopyRepository.Add(item);
+        }
+
+        public BookCopy Find(int id)
+        {
+            return _bookCopyRepository.Find(id);
+        }
     }
 }

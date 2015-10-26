@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Services
 {
-    class AuthorService
+    class AuthorService: IService
     {
         AuthorRepository _authorRepository;
 
@@ -20,6 +20,18 @@ namespace Library.Services
         public IEnumerable<Author> All()
         {
             return _authorRepository.All();
-        } 
+        }
+
+        public event EventHandler Updated;
+
+        public void Add(Author author)
+        {
+            _authorRepository.Add(author);
+        }
+
+        public List<Book> booksByAuthor(string name)
+        {
+            return _authorRepository.booksByAuthor(name);
+        }
     }
 }
