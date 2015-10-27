@@ -28,5 +28,15 @@ namespace Library.Services
         {
             _bookRepository.Add(item);
         }
+        
+        public void AddCopy(Book item)
+        {
+            _bookRepository.AddCopy(item);
+        }
+
+        public Book Find(int id)
+        {
+            return _bookRepository.Find(id);
+        }
     }
 }

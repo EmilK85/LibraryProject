@@ -27,7 +27,15 @@ namespace Library.Repositories
 
         public Author Find(int id)
         {
-            return _context.Authors.ElementAt(0);      
+            Author author = new Author();
+            foreach (Author a in _context.Authors)
+            {
+                if (a.AuthorId == id)
+                {
+                    author = a;
+                }
+            }
+            return author;      
         }
 
         public void Edit(Author item)

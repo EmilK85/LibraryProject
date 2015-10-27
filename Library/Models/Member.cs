@@ -18,6 +18,13 @@ namespace Library.Models
 
         public Member() { }
 
+        public Member(int pNumber, string name)
+        {
+            loans = new List<Loan>();
+            this.Pnumber = pNumber;
+            this.Name = name;
+        }
+
         public Member(int pNumber, string name, List<Loan> loanList)
         {
             this.Pnumber = pNumber;

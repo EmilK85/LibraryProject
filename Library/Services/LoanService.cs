@@ -29,5 +29,20 @@ namespace Library.Services
         {
             _loanRepository.Add(item);
         }
+
+        public void Remove(Loan item)
+        {
+            _loanRepository.Remove(item);
+        }
+
+        public Loan Find(int id)
+        {
+            return _loanRepository.Find(id);
+        }
+
+        public int ReturnLoan(Loan loan)
+        {
+            return _loanRepository.ReturnLoan(loan);
+        }
     }
 }

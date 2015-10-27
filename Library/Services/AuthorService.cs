@@ -33,5 +33,10 @@ namespace Library.Services
         {
             return _authorRepository.booksByAuthor(name);
         }
+
+        public Author Find(int id)
+        {
+            return _authorRepository.Find(id);
+        }
     }
 }

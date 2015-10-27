@@ -26,13 +26,34 @@ namespace Library.Repositories
             _context.SaveChanges();
         }
 
+        public void AddCopy(Book item)
+        {
+            int id = item.Id;
+            foreach(Book b in _context.Books.ToList())
+            {
+                if(id == b.Id)
+                {
+                    b.AddCopy();
+                }
+            }
+            _context.SaveChanges();
+        }
+
         public void Remove(Book item)
         {
         }
 
         public Book Find(int id)
         {
-            return _context.Books.ElementAt(0);
+            Book book = new Book();
+            foreach (Book b in _context.Books)
+            {
+                if (b.Id== id)
+                {
+                    book = b;
+                }
+            }
+            return book;
         }
 
         public void Edit(Book item)

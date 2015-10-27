@@ -123,14 +123,6 @@ namespace Library
 
         }
 
-        private void ListAllMembers()
-        {
-            foreach(Member member in _memberService.All())
-            {
-                lbBooks.Items.Add(member);
-            }
-        }
-
         private void ListAllLoans()
         {
             foreach (Loan loan in _loanService.All())
@@ -139,13 +131,6 @@ namespace Library
             }
         }
 
-        private void ListAllAuthors()
-        {
-            foreach(Author author in _authorService.All())
-            {
-                lbBooks.Items.Add(author);
-            }
-        }
 
         private void bookBtn_Click(object sender, EventArgs e)
         {
@@ -161,12 +146,16 @@ namespace Library
 
         private void memberBtn_Click(object sender, EventArgs e)
         {
-
+            mainPanel.Visible = false;
+            memberPanel.Visible = true;
+            memberPanel.Dock = DockStyle.Fill;
         }
 
         private void authorBtn_Click(object sender, EventArgs e)
         {
-
+            mainPanel.Visible = false;
+            authorPanel.Visible = true;
+            authorPanel.Dock = DockStyle.Fill;
         }
 
         private void bookHome_Click(object sender, EventArgs e)
@@ -198,6 +187,190 @@ namespace Library
             authorInputTb.Focus();
         }
 
+        private void availableBookBtn_Click(object sender, EventArgs e)
+        {
+            lbBooks.Items.Clear();
 
+            List<BookCopy> bCopyList = new List<BookCopy>();
+            foreach(BookCopy bCopy in _bookCopyService.All())
+            {
+                bCopyList.Add(bCopy);
+            }
+
+            List<BookCopy> sortedList = bCopyList.OrderBy(b => b.book.Id).ToList();
+
+            foreach (BookCopy bCopy in sortedList)
+            {
+                lbBooks.Items.Add(bCopy);
+            }
+        }
+
+        private void addCopyBtn_Click(object sender, EventArgs e)
+        {
+            var item = lbBooks.SelectedItem;
+            if(item is Book)
+            {
+                _bookService.AddCopy((Book)item);
+            }
+        }
+
+        private void addBookBtn_Click(object sender, EventArgs e)
+        {
+            bookPanel.Visible = false;
+            mainPanel.Visible = false;
+            addBookPanel.Visible = true;
+            addBookPanel.Dock = DockStyle.Fill;
+        }
+
+        private void addBookBookBtn_Click(object sender, EventArgs e)
+        {
+            Author _author = new Author()
+            {
+                Name = addBookAuthorTb.Text,
+                books = new List<Book>()
+            };
+
+            string title = addBookTitleTb.Text;
+            long isbn = long.Parse(addBookIsbnTb.Text);
+            int nrOfCopies = 0;
+            string description = addBookDescTb.Text;
+
+            Book addBook = new Book(_author, title, description, isbn, nrOfCopies);
+
+            //Book addBook = new Book()
+            //{
+            //    Title = addBookTitleTb.Text,
+            //    IsbnNumber = long.Parse(addBookIsbnTb.Text),
+            //    NrOfCopies = 0,
+            //    Description = addBookDescTb.Text,
+            //    author = bookAuthor
+            //};
+            _author.books.Add(addBook);
+            //_bookService.Add(addBook);
+            _authorService.Add(_author);
+        }
+
+        private void returnBookBtn_Click(object sender, EventArgs e)
+        {
+            bookPanel.Visible = true;
+            addBookPanel.Visible = false;
+        }
+
+        private void memberReturnBtn_Click(object sender, EventArgs e)
+        {
+            mainPanel.Visible = true;
+            memberPanel.Visible = false;
+            memberLb.Items.Clear();
+        }
+
+        private void allMemberBtn_Click(object sender, EventArgs e)
+        {
+            memberLb.Items.Clear();
+
+            foreach (Member member in _memberService.All())
+            {
+                memberLb.Items.Add(member);
+            }
+        }
+
+        private void memberLoanBtn_Click(object sender, EventArgs e)
+        {
+            memberLb.Items.Clear();
+            string memberName = searchMemberTb.Text;
+            foreach(Loan l in _memberService.LoansByMember(memberName))
+            {
+                memberLb.Items.Add(l);
+            }
+            searchMemberTb.Text = "";
+            searchMemberTb.Focus();
+        }
+
+        private void addMemberBtn_Click(object sender, EventArgs e)
+        {
+            string name = memberNameTb.Text;
+            int pNumber = int.Parse(pNumberTb.Text);
+
+            Member _member = new Member(pNumber, name);
+
+            _memberService.Add(_member);
+            pNumberTb.Text = "";
+            memberNameTb.Text = "";
+        }
+
+        private void authorHomeBtn_Click(object sender, EventArgs e)
+        {
+            mainPanel.Visible = true;
+            authorPanel.Visible = false;
+            authorLb.Items.Clear();
+        }
+
+        private void allAuthorsBtn_Click(object sender, EventArgs e)
+        {
+            authorLb.Items.Clear();
+            foreach (Author author in _authorService.All())
+            {
+                authorLb.Items.Add(author);
+            }
+        }
+
+        private void addAuthorBtn_Click(object sender, EventArgs e)
+        {
+            string name = authorNameTb.Text;
+
+            Author _author = new Author(name);
+
+            _authorService.Add(_author);
+            authorNameTb.Text = "";
+        }
+
+        private void loanBtn_Click_1(object sender, EventArgs e)
+        {
+            string name = memberLoanTb.Text;
+            string book = bookLoanTb.Text;
+            int bookId;
+            int memberId;
+            BookCopy bCopy = new BookCopy();
+            Member member = new Member();
+
+            foreach(Book b in _bookService.All())
+            {
+                if(b.Title == book)
+                {
+                    bookId = b.Id;
+                    bCopy = _bookCopyService.Find(bookId);
+                }
+            }
+
+            foreach (Member m in _memberService.All())
+            {
+                if (m.Name == name)
+                {
+                    memberId = m.MemberId;
+                    member = _memberService.Find(memberId);
+                }
+            }
+
+            Loan loan = new Loan(bCopy, member);
+            _loanService.Add(loan);
+        }
+
+        private void returnLoanBtn_Click(object sender, EventArgs e)
+        {
+            var item = memberLb.SelectedItem;
+            if (item is Loan)
+            {
+                if(_loanService.ReturnLoan((Loan)item) == 0)
+                {
+                    MessageBox.Show("Loan returned!");
+                }
+                else
+                {
+                    int days = _loanService.ReturnLoan((Loan)item);
+                    int fee = days * 10;
+                    MessageBox.Show("You owe " + fee + " kr!");
+                }
+                _loanService.Remove((Loan)item);
+            }
+        }
     }
 }

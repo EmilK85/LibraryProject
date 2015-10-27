@@ -17,6 +17,12 @@ namespace Library.Models
 
         public Author(){ }
 
+        public Author(string name)
+        {
+            books = new List<Book>();
+            this.Name = name;
+        }
+
         public Author(string name, List<Book> bookList)
         {
             this.Name = name;

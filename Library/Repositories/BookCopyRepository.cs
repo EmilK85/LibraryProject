@@ -30,9 +30,13 @@ namespace Library.Repositories
             BookCopy bookCopy = new BookCopy();
             foreach (BookCopy bCopy in _context.BookCopies)
             {
-                if(bCopy.BookCopyId == id)
+                if(bCopy.book.Id == id)
                 {
-                    bookCopy = bCopy;
+                    if (bCopy.IsLoaned != true)
+                    {
+                        bookCopy = bCopy;
+                        return bookCopy;
+                    }
                 }
             }
 

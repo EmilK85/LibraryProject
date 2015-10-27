@@ -27,7 +27,15 @@ namespace Library.Repositories
 
         public Member Find(int id)
         {
-            return _context.Members.ElementAt(0);
+            Member member = new Member();
+            foreach (Member m in _context.Members)
+            {
+                if (m.MemberId == id)
+                {
+                    member = m;
+                }
+            }
+            return member; 
         }
 
         public void Edit(Member item)
@@ -37,6 +45,19 @@ namespace Library.Repositories
         public IEnumerable<Member> All()
         {
             return _context.Members.ToList();
+        }
+
+        public List<Loan> LoansByMember(string name)
+        {
+            List<Loan> loanList = new List<Loan>();
+            foreach(Member m in _context.Members)
+            {
+                if(m.Name == name)
+                {
+                    loanList = m.loans;
+                }
+            }
+            return loanList;
         }
     }
 }

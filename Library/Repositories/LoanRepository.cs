@@ -23,11 +23,21 @@ namespace Library.Repositories
 
         public void Remove(Loan item)
         {
+            _context.Loans.Remove(item);
+            _context.SaveChanges();
         }
 
         public Loan Find(int id)
         {
-            return _context.Loans.ElementAt(0);
+            Loan loan = new Loan();
+            foreach (Loan l in _context.Loans)
+            {
+                if (l.LoanId == id)
+                {
+                    loan = l;
+                }
+            }
+            return loan; 
         }
 
         public void Edit(Loan item)
@@ -37,6 +47,22 @@ namespace Library.Repositories
         public IEnumerable<Loan> All()
         {
             return _context.Loans.ToList();
+        }
+
+        public int ReturnLoan(Loan loan)
+        {
+            loan.TimeOfReturn = DateTime.Now;
+
+            if (DateTime.Now < loan.DueDate)
+            {
+                return 0;
+            }
+            else
+            {
+                double differance = (DateTime.Now.Date - loan.DueDate.Date).TotalDays;
+                int diff = Convert.ToInt32(differance);
+                return diff;
+            }
         }
     }
 }

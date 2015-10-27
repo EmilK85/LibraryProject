@@ -46,5 +46,10 @@ namespace Library.Models
                 bCopyList.Add(new BookCopy(this));
             }
         }
+
+        public void AddCopy()
+        {
+            bCopyList.Add(new BookCopy(this));
+        }
     }
 }

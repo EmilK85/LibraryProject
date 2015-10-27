@@ -12,17 +12,28 @@ namespace Library.Models
         public int BookCopyId { get; set; }
         [Required]
         public Book book { get; set; }
+        public bool IsLoaned { get; set; }
 
-        public BookCopy() { }
+        public BookCopy() 
+        {
+            this.book = new Book();
+            this.IsLoaned = false;
+        }
 
         public BookCopy(Book _book)
         {
             this.book = _book;
+            this.IsLoaned = false;
         }
 
         public override string ToString()
         {
-            return String.Format("[{0}] -- {1}", this.BookCopyId, this.book.Title);
+            string availability = "Available";
+            if(this.IsLoaned)
+            {
+                availability = "Loaned";
+            }
+            return String.Format("[{0}] -- {1} -- {2}", this.BookCopyId, this.book.Title, availability);
         }
     }
 }

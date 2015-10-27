@@ -28,5 +28,15 @@ namespace Library.Services
         {
             _memberRepository.Add(item);
         }
+
+        public List<Loan> LoansByMember(string name)
+        {
+            return _memberRepository.LoansByMember(name);
+        }
+
+        public Member Find(int id)
+        {
+            return _memberRepository.Find(id);
+        }
     }
 }

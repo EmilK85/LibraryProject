@@ -21,6 +21,9 @@ namespace Library.Models
         {
             this.TimeOfLoan = DateTime.Now;
             this.DueDate = DateTime.Now.AddDays(15);
+            bookCopy.IsLoaned = true;
+            this.bookCopy = new BookCopy();
+            this.member = new Member();
         }
 
         public Loan(BookCopy _bookCopy, Member _member)
@@ -29,6 +32,7 @@ namespace Library.Models
             this.bookCopy = _bookCopy;
             this.TimeOfLoan =  DateTime.Now;
             this.DueDate = DateTime.Now.AddDays(15);
+            bookCopy.IsLoaned = true;
         }
 
         public override string ToString()
