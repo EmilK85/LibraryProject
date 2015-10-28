@@ -19,7 +19,8 @@ namespace Library.Models
         public List<BookCopy> bCopyList { get; set; }
         
         public Book()
-        { }
+        {
+        }
 
         public Book(Author _author, string title, string description, long isbnNumber, int nrOfCopies)
         {
@@ -50,6 +51,7 @@ namespace Library.Models
         public void AddCopy()
         {
             bCopyList.Add(new BookCopy(this));
+            //this.NrOfCopies = bCopyList.Count;
         }
     }
 }

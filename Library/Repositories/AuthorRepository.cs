@@ -47,7 +47,7 @@ namespace Library.Repositories
             return _context.Authors.ToList();
         }
 
-        public List<Book> BooksByAuthor(string name)
+        public List<Book> booksByAuthor(string name)
         {
             List<Book> bList = new List<Book>();
             foreach(Author a in _context.Authors)

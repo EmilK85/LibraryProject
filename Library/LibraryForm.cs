@@ -82,7 +82,7 @@ namespace Library
             Book monteCristo = new Book(AlexDumas, title, description, isbnOne, nrOfCopyOne);
             Book monteBlisto = new Book(AlexDumas, titleTwo, descriptionTwo, isbnTwo, nrOfCopyTwo);
             Book ulysses = new Book(JamesJoyce, titleThree, descriptionThree, isbnThree, nrOfCopyOne);
-
+            
             AlexDumas.books.Add(monteCristo);
             AlexDumas.books.Add(monteBlisto);
             JamesJoyce.books.Add(ulysses);
@@ -178,8 +178,11 @@ namespace Library
 
             foreach (BookCopy bCopy in sortedList)
             {
+                if (bCopy.IsLoaned == false)
+                {
                 lbBooks.Items.Add(bCopy);
             }
+        }
         }
 
         private void addCopyBtn_Click(object sender, EventArgs e)
@@ -321,6 +324,7 @@ namespace Library
                 }
             }
 
+
             foreach (Member m in _memberService.All())
             {
                 if (m.Name == name)
@@ -329,9 +333,15 @@ namespace Library
                     member = _memberService.Find(memberId);
                 }
             }
-
+            if (bCopy.book.NrOfCopies != 0)
+            {
             Loan loan = new Loan(bCopy, member);
             _loanService.Add(loan);
+        }
+            else
+            {
+                MessageBox.Show("Book or Member doesn't exist or not enough book copies");
+            }
         }
 
         private void returnLoanBtn_Click(object sender, EventArgs e)
@@ -350,6 +360,24 @@ namespace Library
                     MessageBox.Show("You owe " + fee + " kr!");
                 }
                 _loanService.Remove((Loan)item);
+            }
+        }
+
+        private void showAllCopies_Click(object sender, EventArgs e)
+        {
+            lbBooks.Items.Clear();
+
+            List<BookCopy> bCopyList = new List<BookCopy>();
+            foreach (BookCopy bCopy in _bookCopyService.All())
+            {
+                bCopyList.Add(bCopy);
+            }
+
+            List<BookCopy> sortedList = bCopyList.OrderBy(b => b.book.Id).ToList();
+
+            foreach (BookCopy bCopy in sortedList)
+            {
+                lbBooks.Items.Add(bCopy);                
             }
         }
     }
