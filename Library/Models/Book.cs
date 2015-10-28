@@ -19,7 +19,8 @@ namespace Library.Models
         public List<BookCopy> bCopyList { get; set; }
         
         public Book()
-        { }
+        {
+        }
 
         public Book(Author _author, string title, string description, long isbnNumber, int nrOfCopies)
         {
@@ -35,7 +36,7 @@ namespace Library.Models
         public override string ToString() 
         {
             return String.Format("[{0}] -- {1} -- {2} -- {3} -- {4} -- {5}",
-                this.Id, this.Title, this.IsbnNumber, this.NrOfCopies, this.Description, this.author.Name);
+                this.Id, this.Title, this.IsbnNumber, bCopyList.Count, this.Description, this.author.Name);
         }
 
         private void CreateBookCopyList(int nrOfCopies)
@@ -50,6 +51,7 @@ namespace Library.Models
         public void AddCopy()
         {
             bCopyList.Add(new BookCopy(this));
+            //this.NrOfCopies = bCopyList.Count;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace Library.Repositories
         {
             loan.TimeOfReturn = DateTime.Now;
 
-            if (DateTime.Now < loan.DueDate)
+            if (DateTime.Now <= loan.DueDate)
             {
                 return 0;
             }
