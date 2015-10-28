@@ -11,6 +11,7 @@ namespace Library.Services
     class BookCopyService: IService
     {
         BookCopyRepository _bookCopyRepository;
+        public event EventHandler Updated;
 
         public BookCopyService(RepositoryFactory repoFactory)
         {
@@ -22,8 +23,6 @@ namespace Library.Services
             return _bookCopyRepository.All();
         }
 
-        public event EventHandler Updated;
-
         public void Add(BookCopy item)
         {
             _bookCopyRepository.Add(item);
@@ -32,6 +31,14 @@ namespace Library.Services
         public BookCopy Find(int id)
         {
             return _bookCopyRepository.Find(id);
+        }
+
+        public void OnUpdated(object sender, EventArgs e)
+        {
+            if (Updated != null)
+            {
+                Updated(this, e);
+            }
         }
     }
 }

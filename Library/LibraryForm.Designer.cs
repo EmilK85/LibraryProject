@@ -71,7 +71,6 @@
             this.addAuthorBtn = new System.Windows.Forms.Button();
             this.allAuthorsBtn = new System.Windows.Forms.Button();
             this.authorLb = new System.Windows.Forms.ListBox();
-            this.showAllCopies = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.bookPanel.SuspendLayout();
             this.addBookPanel.SuspendLayout();
@@ -138,7 +137,6 @@
             // 
             // bookPanel
             // 
-            this.bookPanel.Controls.Add(this.showAllCopies);
             this.bookPanel.Controls.Add(this.loanBtn);
             this.bookPanel.Controls.Add(this.bookLoanTb);
             this.bookPanel.Controls.Add(this.label5);
@@ -589,17 +587,6 @@
             this.authorLb.Size = new System.Drawing.Size(22, 186);
             this.authorLb.TabIndex = 0;
             // 
-            // showAllCopies
-            // 
-            this.showAllCopies.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.showAllCopies.Location = new System.Drawing.Point(119, 230);
-            this.showAllCopies.Name = "showAllCopies";
-            this.showAllCopies.Size = new System.Drawing.Size(74, 38);
-            this.showAllCopies.TabIndex = 13;
-            this.showAllCopies.Text = "Show all book copies";
-            this.showAllCopies.UseVisualStyleBackColor = true;
-            this.showAllCopies.Click += new System.EventHandler(this.showAllCopies_Click);
-            // 
             // LibraryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -675,7 +662,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button loanBtn;
         private System.Windows.Forms.Button returnLoanBtn;
-        private System.Windows.Forms.Button showAllCopies;
     }
 }
 

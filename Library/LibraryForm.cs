@@ -46,6 +46,7 @@ namespace Library
 
             RepositoryFactory bookCopyRepoFactory = new RepositoryFactory();
             _bookCopyService = new BookCopyService(bookCopyRepoFactory);
+            _bookCopyService.Updated += availableBookBtn_Click;
 
             CreateLibrary();
         }
@@ -143,6 +144,7 @@ namespace Library
         private void showBookBtn_Click(object sender, EventArgs e)
         {
             lbBooks.Items.Clear();
+            addCopyBtn.Visible = true;
 
             foreach (Book book in _bookService.All())
             {
@@ -167,6 +169,7 @@ namespace Library
         private void availableBookBtn_Click(object sender, EventArgs e)
         {
             lbBooks.Items.Clear();
+            addCopyBtn.Visible = false;
 
             List<BookCopy> bCopyList = new List<BookCopy>();
             foreach(BookCopy bCopy in _bookCopyService.All())
@@ -180,9 +183,9 @@ namespace Library
             {
                 if (bCopy.IsLoaned == false)
                 {
-                lbBooks.Items.Add(bCopy);
+                    lbBooks.Items.Add(bCopy);
+                }
             }
-        }
         }
 
         private void addCopyBtn_Click(object sender, EventArgs e)
@@ -324,7 +327,6 @@ namespace Library
                 }
             }
 
-
             foreach (Member m in _memberService.All())
             {
                 if (m.Name == name)
@@ -333,15 +335,17 @@ namespace Library
                     member = _memberService.Find(memberId);
                 }
             }
+
             if (bCopy.book.NrOfCopies != 0)
             {
-            Loan loan = new Loan(bCopy, member);
-            _loanService.Add(loan);
-        }
+                Loan loan = new Loan(bCopy, member);
+                _loanService.Add(loan);
+            }
             else
             {
                 MessageBox.Show("Book or Member doesn't exist or not enough book copies");
             }
+            _bookCopyService.OnUpdated(this, new EventArgs());
         }
 
         private void returnLoanBtn_Click(object sender, EventArgs e)
@@ -360,24 +364,6 @@ namespace Library
                     MessageBox.Show("You owe " + fee + " kr!");
                 }
                 _loanService.Remove((Loan)item);
-            }
-        }
-
-        private void showAllCopies_Click(object sender, EventArgs e)
-        {
-            lbBooks.Items.Clear();
-
-            List<BookCopy> bCopyList = new List<BookCopy>();
-            foreach (BookCopy bCopy in _bookCopyService.All())
-            {
-                bCopyList.Add(bCopy);
-            }
-
-            List<BookCopy> sortedList = bCopyList.OrderBy(b => b.book.Id).ToList();
-
-            foreach (BookCopy bCopy in sortedList)
-            {
-                lbBooks.Items.Add(bCopy);                
             }
         }
     }
