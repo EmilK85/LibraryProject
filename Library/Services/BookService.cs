@@ -27,16 +27,26 @@ namespace Library.Services
         public void Add(Book item)
         {
             _bookRepository.Add(item);
+            OnUpdated(this, new EventArgs());
         }
         
         public void AddCopy(Book item)
         {
             _bookRepository.AddCopy(item);
+            OnUpdated(this, new EventArgs());
         }
 
         public Book Find(int id)
         {
             return _bookRepository.Find(id);
+        }
+
+        public void OnUpdated(object sender, EventArgs e)
+        {
+            if (Updated != null)
+            {
+                Updated(this, e);
+            }
         }
     }
 }

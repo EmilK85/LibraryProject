@@ -35,7 +35,7 @@ namespace Library.Models
         public override string ToString() 
         {
             return String.Format("[{0}] -- {1} -- {2} -- {3} -- {4} -- {5}",
-                this.Id, this.Title, this.IsbnNumber, this.NrOfCopies, this.Description, this.author.Name);
+                this.Id, this.Title, this.IsbnNumber, bCopyList.Count, this.Description, this.author.Name);
         }
 
         private void CreateBookCopyList(int nrOfCopies)

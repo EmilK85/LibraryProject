@@ -20,6 +20,7 @@ namespace Library
         AuthorService _authorService;
         MemberService _memberService;
         LoanService _loanService;
+        int selectedIndex = 0;
 
         public LibraryForm() 
         {
@@ -29,6 +30,7 @@ namespace Library
 
             RepositoryFactory bookRepoFactory = new RepositoryFactory();
             _bookService = new BookService(bookRepoFactory);
+            _bookService.Updated += showBookBtn_Click;
 
             RepositoryFactory authorRepoFactory = new RepositoryFactory();
             _authorService = new AuthorService(authorRepoFactory);
@@ -43,9 +45,6 @@ namespace Library
             _bookCopyService = new BookCopyService(bookCopyRepoFactory);
 
             CreateLibrary();
-            //ListAllAuthors();
-            //ListAllMembers();
-            //ListAllLoans();
         }
 
         public void CreateLibrary()
@@ -80,24 +79,6 @@ namespace Library
             Book monteCristo = new Book(AlexDumas, title, description, isbnOne, nrOfCopyOne);
             Book monteBlisto = new Book(AlexDumas, titleTwo, descriptionTwo, isbnTwo, nrOfCopyTwo);
             Book ulysses = new Book(JamesJoyce, titleThree, descriptionThree, isbnThree, nrOfCopyOne);
-            
-            //Book monteCristo = new Book()
-            //{
-            //    Title = "The Count of Monte Cristo",
-            //    IsbnNumber = 9781435132115,
-            //    NrOfCopies = 7,
-            //    Description = description,
-            //    author = AlexDumas
-            //};
-
-            //Book monteBlisto = new Book()
-            //{
-            //    Title = "The Count of Monte Blisto",
-            //    IsbnNumber = 9781435132114,
-            //    NrOfCopies = 6,
-            //    Description = descriptionTwo,
-            //    author = AlexDumas
-            //};
 
             AlexDumas.books.Add(monteCristo);
             AlexDumas.books.Add(monteBlisto);
@@ -122,15 +103,6 @@ namespace Library
             _loanService.Add(loanTest);
 
         }
-
-        private void ListAllLoans()
-        {
-            foreach (Loan loan in _loanService.All())
-            {
-                lbBooks.Items.Add(loan);
-            }
-        }
-
 
         private void bookBtn_Click(object sender, EventArgs e)
         {
@@ -173,13 +145,15 @@ namespace Library
             {
                 lbBooks.Items.Add(book);
             }
+            lbBooks.SelectedIndex = selectedIndex;
+            lbBooks.Focus();
         }
 
         private void listAuthorBtn_Click(object sender, EventArgs e)
         {
             lbBooks.Items.Clear();
             string authorName = authorInputTb.Text;
-            foreach(Book b in _authorService.booksByAuthor(authorName))
+            foreach(Book b in _authorService.BooksByAuthor(authorName))
             {
                 lbBooks.Items.Add(b);
             }
@@ -208,10 +182,12 @@ namespace Library
         private void addCopyBtn_Click(object sender, EventArgs e)
         {
             var item = lbBooks.SelectedItem;
+            selectedIndex = lbBooks.SelectedIndex;
             if(item is Book)
             {
                 _bookService.AddCopy((Book)item);
             }
+            
         }
 
         private void addBookBtn_Click(object sender, EventArgs e)
@@ -246,8 +222,8 @@ namespace Library
             //    author = bookAuthor
             //};
             _author.books.Add(addBook);
-            //_bookService.Add(addBook);
-            _authorService.Add(_author);
+            _bookService.Add(addBook);
+            //_authorService.Add(_author);
         }
 
         private void returnBookBtn_Click(object sender, EventArgs e)
@@ -316,7 +292,6 @@ namespace Library
         private void addAuthorBtn_Click(object sender, EventArgs e)
         {
             string name = authorNameTb.Text;
-
             Author _author = new Author(name);
 
             _authorService.Add(_author);

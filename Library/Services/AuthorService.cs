@@ -29,9 +29,9 @@ namespace Library.Services
             _authorRepository.Add(author);
         }
 
-        public List<Book> booksByAuthor(string name)
+        public List<Book> BooksByAuthor(string name)
         {
-            return _authorRepository.booksByAuthor(name);
+            return _authorRepository.BooksByAuthor(name);
         }
 
         public Author Find(int id)
