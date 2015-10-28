@@ -64,5 +64,18 @@ namespace Library.Repositories
                 return diff;
             }
         }
+
+        public List<Loan> LoansByMember(string name)
+        {
+            List<Loan> loanList = new List<Loan>();
+            foreach(Loan l in _context.Loans)
+            {
+                if(l.member.Name == name)
+                {
+                    loanList.Add(l);
+                }
+            }
+            return loanList;
+        }
     }
 }

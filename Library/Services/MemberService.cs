@@ -27,16 +27,20 @@ namespace Library.Services
         public void Add(Member item)
         {
             _memberRepository.Add(item);
-        }
-
-        public List<Loan> LoansByMember(string name)
-        {
-            return _memberRepository.LoansByMember(name);
+            OnUpdated(this, new EventArgs());
         }
 
         public Member Find(int id)
         {
             return _memberRepository.Find(id);
+        }
+
+        public void OnUpdated(object sender, EventArgs e)
+        {
+            if (Updated != null)
+            {
+                Updated(this, e);
+            }
         }
     }
 }

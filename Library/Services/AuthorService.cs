@@ -27,6 +27,7 @@ namespace Library.Services
         public void Add(Author author)
         {
             _authorRepository.Add(author);
+            OnUpdated(this, new EventArgs());
         }
 
         public List<Book> BooksByAuthor(string name)
@@ -37,6 +38,14 @@ namespace Library.Services
         public Author Find(int id)
         {
             return _authorRepository.Find(id);
+        }
+
+        public void OnUpdated(object sender, EventArgs e)
+        {
+            if (Updated != null)
+            {
+                Updated(this, e);
+            }
         }
     }
 }

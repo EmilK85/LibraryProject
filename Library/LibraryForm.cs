@@ -34,12 +34,15 @@ namespace Library
 
             RepositoryFactory authorRepoFactory = new RepositoryFactory();
             _authorService = new AuthorService(authorRepoFactory);
+            _authorService.Updated += allAuthorsBtn_Click;
 
             RepositoryFactory memberRepoFactory = new RepositoryFactory();
             _memberService = new MemberService(memberRepoFactory);
+            _memberService.Updated += allMemberBtn_Click;
 
             RepositoryFactory loanRepoFactory = new RepositoryFactory();
             _loanService = new LoanService(loanRepoFactory);
+            _loanService.Updated += memberLoanBtn_Click;
 
             RepositoryFactory bookCopyRepoFactory = new RepositoryFactory();
             _bookCopyService = new BookCopyService(bookCopyRepoFactory);
@@ -252,8 +255,10 @@ namespace Library
         private void memberLoanBtn_Click(object sender, EventArgs e)
         {
             memberLb.Items.Clear();
-            string memberName = searchMemberTb.Text;
-            foreach(Loan l in _memberService.LoansByMember(memberName))
+            string memberName = "";
+            memberName = searchMemberTb.Text;
+            List<Loan> loanList = _loanService.LoansByMember(memberName);
+            foreach (Loan l in loanList)
             {
                 memberLb.Items.Add(l);
             }

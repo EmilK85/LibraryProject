@@ -42,7 +42,21 @@ namespace Library.Services
 
         public int ReturnLoan(Loan loan)
         {
+            OnUpdated(this, new EventArgs());
             return _loanRepository.ReturnLoan(loan);
+        }
+
+        public List<Loan> LoansByMember(string name)
+        {
+            return _loanRepository.LoansByMember(name);
+        }
+
+        public void OnUpdated(object sender, EventArgs e)
+        {
+            if (Updated != null)
+            {
+                Updated(this, e);
+            }
         }
     }
 }
