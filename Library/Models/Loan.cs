@@ -33,6 +33,7 @@ namespace Library.Models
             this.TimeOfLoan =  DateTime.Now;
             this.DueDate = DateTime.Now.AddDays(15);
             bookCopy.IsLoaned = true;
+            _bookCopy.book.NrOfCopies--;
         }
 
         public override string ToString()

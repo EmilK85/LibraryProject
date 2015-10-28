@@ -40,6 +40,11 @@ namespace Library.Services
             return _authorRepository.Find(id);
         }
 
+        public bool FindName(string name)
+        {
+            return _authorRepository.FindName(name);
+        }
+
         public void OnUpdated(object sender, EventArgs e)
         {
             if (Updated != null)

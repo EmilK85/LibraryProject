@@ -77,5 +77,15 @@ namespace Library.Repositories
             }
             return loanList;
         }
+
+        public void ModLoan(Loan item)
+        {
+            DateTime newTimeOfLoan = DateTime.Now.AddDays(-30);
+            DateTime newDueDate = DateTime.Now.AddDays(-15);
+
+            item.TimeOfLoan = newTimeOfLoan;
+            item.DueDate = newDueDate;
+            _context.SaveChanges();
+        }
     }
 }

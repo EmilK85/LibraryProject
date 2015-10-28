@@ -25,15 +25,16 @@
         private void InitializeComponent() {
             this.lbBooks = new System.Windows.Forms.ListBox();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.loanBtn = new System.Windows.Forms.Button();
             this.authorBtn = new System.Windows.Forms.Button();
             this.memberBtn = new System.Windows.Forms.Button();
             this.bookBtn = new System.Windows.Forms.Button();
             this.bookPanel = new System.Windows.Forms.Panel();
-            this.loanBtn = new System.Windows.Forms.Button();
+            this.createLoanBtn = new System.Windows.Forms.Button();
             this.bookLoanTb = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.bookLabel = new System.Windows.Forms.Label();
             this.memberLoanTb = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.memberLabel = new System.Windows.Forms.Label();
             this.addBookBtn = new System.Windows.Forms.Button();
             this.addCopyBtn = new System.Windows.Forms.Button();
             this.availableBookBtn = new System.Windows.Forms.Button();
@@ -71,11 +72,16 @@
             this.addAuthorBtn = new System.Windows.Forms.Button();
             this.allAuthorsBtn = new System.Windows.Forms.Button();
             this.authorLb = new System.Windows.Forms.ListBox();
+            this.loanPanel = new System.Windows.Forms.Panel();
+            this.loanLb = new System.Windows.Forms.ListBox();
+            this.loanHomeBtn = new System.Windows.Forms.Button();
+            this.modLoanBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.bookPanel.SuspendLayout();
             this.addBookPanel.SuspendLayout();
             this.memberPanel.SuspendLayout();
             this.authorPanel.SuspendLayout();
+            this.loanPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbBooks
@@ -86,11 +92,12 @@
             this.lbBooks.HorizontalScrollbar = true;
             this.lbBooks.Location = new System.Drawing.Point(16, 42);
             this.lbBooks.Name = "lbBooks";
-            this.lbBooks.Size = new System.Drawing.Size(335, 147);
+            this.lbBooks.Size = new System.Drawing.Size(155, 147);
             this.lbBooks.TabIndex = 0;
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.loanBtn);
             this.mainPanel.Controls.Add(this.authorBtn);
             this.mainPanel.Controls.Add(this.memberBtn);
             this.mainPanel.Controls.Add(this.bookBtn);
@@ -98,6 +105,18 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(119, 211);
             this.mainPanel.TabIndex = 1;
+            // 
+            // loanBtn
+            // 
+            this.loanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.loanBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.loanBtn.Location = new System.Drawing.Point(21, 95);
+            this.loanBtn.Name = "loanBtn";
+            this.loanBtn.Size = new System.Drawing.Size(75, 23);
+            this.loanBtn.TabIndex = 4;
+            this.loanBtn.Text = "Loan";
+            this.loanBtn.UseVisualStyleBackColor = true;
+            this.loanBtn.Click += new System.EventHandler(this.loanBtn_Click);
             // 
             // authorBtn
             // 
@@ -137,11 +156,11 @@
             // 
             // bookPanel
             // 
-            this.bookPanel.Controls.Add(this.loanBtn);
+            this.bookPanel.Controls.Add(this.createLoanBtn);
             this.bookPanel.Controls.Add(this.bookLoanTb);
-            this.bookPanel.Controls.Add(this.label5);
+            this.bookPanel.Controls.Add(this.bookLabel);
             this.bookPanel.Controls.Add(this.memberLoanTb);
-            this.bookPanel.Controls.Add(this.label4);
+            this.bookPanel.Controls.Add(this.memberLabel);
             this.bookPanel.Controls.Add(this.addBookBtn);
             this.bookPanel.Controls.Add(this.addCopyBtn);
             this.bookPanel.Controls.Add(this.availableBookBtn);
@@ -150,65 +169,65 @@
             this.bookPanel.Controls.Add(this.showBookBtn);
             this.bookPanel.Controls.Add(this.bookHome);
             this.bookPanel.Controls.Add(this.lbBooks);
-            this.bookPanel.Location = new System.Drawing.Point(493, 237);
+            this.bookPanel.Location = new System.Drawing.Point(594, 318);
             this.bookPanel.Name = "bookPanel";
-            this.bookPanel.Size = new System.Drawing.Size(354, 430);
+            this.bookPanel.Size = new System.Drawing.Size(174, 166);
             this.bookPanel.TabIndex = 2;
             this.bookPanel.Visible = false;
             // 
-            // loanBtn
+            // createLoanBtn
             // 
-            this.loanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.loanBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.loanBtn.Location = new System.Drawing.Point(228, 387);
-            this.loanBtn.Name = "loanBtn";
-            this.loanBtn.Size = new System.Drawing.Size(75, 23);
-            this.loanBtn.TabIndex = 12;
-            this.loanBtn.Text = "Loan book";
-            this.loanBtn.UseVisualStyleBackColor = true;
-            this.loanBtn.Click += new System.EventHandler(this.loanBtn_Click_1);
+            this.createLoanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.createLoanBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.createLoanBtn.Location = new System.Drawing.Point(141, 254);
+            this.createLoanBtn.Name = "createLoanBtn";
+            this.createLoanBtn.Size = new System.Drawing.Size(75, 23);
+            this.createLoanBtn.TabIndex = 12;
+            this.createLoanBtn.Text = "Loan book";
+            this.createLoanBtn.UseVisualStyleBackColor = true;
+            this.createLoanBtn.Click += new System.EventHandler(this.createLoanBtn_Click);
             // 
             // bookLoanTb
             // 
             this.bookLoanTb.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.bookLoanTb.Location = new System.Drawing.Point(231, 360);
+            this.bookLoanTb.Location = new System.Drawing.Point(141, 228);
             this.bookLoanTb.Name = "bookLoanTb";
             this.bookLoanTb.Size = new System.Drawing.Size(100, 20);
             this.bookLoanTb.TabIndex = 11;
             // 
-            // label5
+            // bookLabel
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(228, 347);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Book";
+            this.bookLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bookLabel.AutoSize = true;
+            this.bookLabel.Location = new System.Drawing.Point(138, 215);
+            this.bookLabel.Name = "bookLabel";
+            this.bookLabel.Size = new System.Drawing.Size(32, 13);
+            this.bookLabel.TabIndex = 10;
+            this.bookLabel.Text = "Book";
             // 
             // memberLoanTb
             // 
             this.memberLoanTb.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.memberLoanTb.Location = new System.Drawing.Point(228, 320);
+            this.memberLoanTb.Location = new System.Drawing.Point(141, 187);
             this.memberLoanTb.Name = "memberLoanTb";
             this.memberLoanTb.Size = new System.Drawing.Size(100, 20);
             this.memberLoanTb.TabIndex = 9;
             // 
-            // label4
+            // memberLabel
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(225, 303);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Member";
+            this.memberLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.memberLabel.AutoSize = true;
+            this.memberLabel.Location = new System.Drawing.Point(141, 171);
+            this.memberLabel.Name = "memberLabel";
+            this.memberLabel.Size = new System.Drawing.Size(45, 13);
+            this.memberLabel.TabIndex = 8;
+            this.memberLabel.Text = "Member";
             // 
             // addBookBtn
             // 
             this.addBookBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addBookBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addBookBtn.Location = new System.Drawing.Point(137, 274);
+            this.addBookBtn.Location = new System.Drawing.Point(47, 142);
             this.addBookBtn.Name = "addBookBtn";
             this.addBookBtn.Size = new System.Drawing.Size(75, 23);
             this.addBookBtn.TabIndex = 7;
@@ -219,7 +238,7 @@
             // addCopyBtn
             // 
             this.addCopyBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addCopyBtn.Location = new System.Drawing.Point(22, 274);
+            this.addCopyBtn.Location = new System.Drawing.Point(-68, 142);
             this.addCopyBtn.Name = "addCopyBtn";
             this.addCopyBtn.Size = new System.Drawing.Size(75, 23);
             this.addCopyBtn.TabIndex = 6;
@@ -230,7 +249,7 @@
             // availableBookBtn
             // 
             this.availableBookBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.availableBookBtn.Location = new System.Drawing.Point(228, 230);
+            this.availableBookBtn.Location = new System.Drawing.Point(138, 98);
             this.availableBookBtn.Name = "availableBookBtn";
             this.availableBookBtn.Size = new System.Drawing.Size(121, 38);
             this.availableBookBtn.TabIndex = 5;
@@ -241,7 +260,7 @@
             // authorInputTb
             // 
             this.authorInputTb.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.authorInputTb.Location = new System.Drawing.Point(22, 303);
+            this.authorInputTb.Location = new System.Drawing.Point(-68, 171);
             this.authorInputTb.Name = "authorInputTb";
             this.authorInputTb.Size = new System.Drawing.Size(100, 20);
             this.authorInputTb.TabIndex = 4;
@@ -250,7 +269,7 @@
             // 
             this.listAuthorBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.listAuthorBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.listAuthorBtn.Location = new System.Drawing.Point(22, 329);
+            this.listAuthorBtn.Location = new System.Drawing.Point(-68, 197);
             this.listAuthorBtn.Name = "listAuthorBtn";
             this.listAuthorBtn.Size = new System.Drawing.Size(88, 23);
             this.listAuthorBtn.TabIndex = 3;
@@ -262,7 +281,7 @@
             // 
             this.showBookBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.showBookBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.showBookBtn.Location = new System.Drawing.Point(22, 245);
+            this.showBookBtn.Location = new System.Drawing.Point(-68, 113);
             this.showBookBtn.Name = "showBookBtn";
             this.showBookBtn.Size = new System.Drawing.Size(91, 23);
             this.showBookBtn.TabIndex = 2;
@@ -274,7 +293,7 @@
             // 
             this.bookHome.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bookHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.bookHome.Location = new System.Drawing.Point(22, 357);
+            this.bookHome.Location = new System.Drawing.Point(-68, 225);
             this.bookHome.Name = "bookHome";
             this.bookHome.Size = new System.Drawing.Size(75, 23);
             this.bookHome.TabIndex = 1;
@@ -386,6 +405,7 @@
             // 
             // memberPanel
             // 
+            this.memberPanel.Controls.Add(this.modLoanBtn);
             this.memberPanel.Controls.Add(this.returnLoanBtn);
             this.memberPanel.Controls.Add(this.pNumberTb);
             this.memberPanel.Controls.Add(this.label2);
@@ -397,9 +417,9 @@
             this.memberPanel.Controls.Add(this.memberReturnBtn);
             this.memberPanel.Controls.Add(this.allMemberBtn);
             this.memberPanel.Controls.Add(this.memberLb);
-            this.memberPanel.Location = new System.Drawing.Point(180, 29);
+            this.memberPanel.Location = new System.Drawing.Point(186, 115);
             this.memberPanel.Name = "memberPanel";
-            this.memberPanel.Size = new System.Drawing.Size(272, 446);
+            this.memberPanel.Size = new System.Drawing.Size(334, 373);
             this.memberPanel.TabIndex = 4;
             this.memberPanel.Visible = false;
             // 
@@ -407,7 +427,7 @@
             // 
             this.returnLoanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.returnLoanBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.returnLoanBtn.Location = new System.Drawing.Point(13, 355);
+            this.returnLoanBtn.Location = new System.Drawing.Point(44, 318);
             this.returnLoanBtn.Name = "returnLoanBtn";
             this.returnLoanBtn.Size = new System.Drawing.Size(75, 23);
             this.returnLoanBtn.TabIndex = 10;
@@ -418,7 +438,7 @@
             // pNumberTb
             // 
             this.pNumberTb.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pNumberTb.Location = new System.Drawing.Point(144, 312);
+            this.pNumberTb.Location = new System.Drawing.Point(175, 275);
             this.pNumberTb.Name = "pNumberTb";
             this.pNumberTb.Size = new System.Drawing.Size(100, 20);
             this.pNumberTb.TabIndex = 9;
@@ -427,7 +447,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(141, 296);
+            this.label2.Location = new System.Drawing.Point(172, 259);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 8;
@@ -437,7 +457,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(141, 253);
+            this.label1.Location = new System.Drawing.Point(172, 216);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 7;
@@ -446,7 +466,7 @@
             // memberNameTb
             // 
             this.memberNameTb.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.memberNameTb.Location = new System.Drawing.Point(144, 269);
+            this.memberNameTb.Location = new System.Drawing.Point(175, 232);
             this.memberNameTb.Name = "memberNameTb";
             this.memberNameTb.Size = new System.Drawing.Size(100, 20);
             this.memberNameTb.TabIndex = 6;
@@ -455,7 +475,7 @@
             // 
             this.memberLoanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.memberLoanBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.memberLoanBtn.Location = new System.Drawing.Point(13, 326);
+            this.memberLoanBtn.Location = new System.Drawing.Point(44, 289);
             this.memberLoanBtn.Name = "memberLoanBtn";
             this.memberLoanBtn.Size = new System.Drawing.Size(100, 23);
             this.memberLoanBtn.TabIndex = 5;
@@ -466,7 +486,7 @@
             // searchMemberTb
             // 
             this.searchMemberTb.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.searchMemberTb.Location = new System.Drawing.Point(13, 300);
+            this.searchMemberTb.Location = new System.Drawing.Point(44, 263);
             this.searchMemberTb.Name = "searchMemberTb";
             this.searchMemberTb.Size = new System.Drawing.Size(100, 20);
             this.searchMemberTb.TabIndex = 4;
@@ -475,7 +495,7 @@
             // 
             this.addMemberBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addMemberBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addMemberBtn.Location = new System.Drawing.Point(144, 338);
+            this.addMemberBtn.Location = new System.Drawing.Point(175, 301);
             this.addMemberBtn.Name = "addMemberBtn";
             this.addMemberBtn.Size = new System.Drawing.Size(75, 23);
             this.addMemberBtn.TabIndex = 3;
@@ -487,7 +507,7 @@
             // 
             this.memberReturnBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.memberReturnBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.memberReturnBtn.Location = new System.Drawing.Point(0, 380);
+            this.memberReturnBtn.Location = new System.Drawing.Point(44, 347);
             this.memberReturnBtn.Name = "memberReturnBtn";
             this.memberReturnBtn.Size = new System.Drawing.Size(75, 23);
             this.memberReturnBtn.TabIndex = 2;
@@ -499,7 +519,7 @@
             // 
             this.allMemberBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.allMemberBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.allMemberBtn.Location = new System.Drawing.Point(13, 253);
+            this.allMemberBtn.Location = new System.Drawing.Point(44, 206);
             this.allMemberBtn.Name = "allMemberBtn";
             this.allMemberBtn.Size = new System.Drawing.Size(100, 23);
             this.allMemberBtn.TabIndex = 1;
@@ -514,7 +534,7 @@
             this.memberLb.FormattingEnabled = true;
             this.memberLb.Location = new System.Drawing.Point(16, 22);
             this.memberLb.Name = "memberLb";
-            this.memberLb.Size = new System.Drawing.Size(225, 160);
+            this.memberLb.Size = new System.Drawing.Size(287, 160);
             this.memberLb.TabIndex = 0;
             // 
             // authorPanel
@@ -587,15 +607,61 @@
             this.authorLb.Size = new System.Drawing.Size(22, 186);
             this.authorLb.TabIndex = 0;
             // 
+            // loanPanel
+            // 
+            this.loanPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.loanPanel.Controls.Add(this.loanLb);
+            this.loanPanel.Controls.Add(this.loanHomeBtn);
+            this.loanPanel.Location = new System.Drawing.Point(186, 20);
+            this.loanPanel.Name = "loanPanel";
+            this.loanPanel.Size = new System.Drawing.Size(125, 71);
+            this.loanPanel.TabIndex = 6;
+            this.loanPanel.Visible = false;
+            // 
+            // loanLb
+            // 
+            this.loanLb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.loanLb.FormattingEnabled = true;
+            this.loanLb.Location = new System.Drawing.Point(30, 16);
+            this.loanLb.Name = "loanLb";
+            this.loanLb.Size = new System.Drawing.Size(49, 199);
+            this.loanLb.TabIndex = 1;
+            // 
+            // loanHomeBtn
+            // 
+            this.loanHomeBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.loanHomeBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.loanHomeBtn.Location = new System.Drawing.Point(-67, 190);
+            this.loanHomeBtn.Name = "loanHomeBtn";
+            this.loanHomeBtn.Size = new System.Drawing.Size(75, 23);
+            this.loanHomeBtn.TabIndex = 0;
+            this.loanHomeBtn.Text = "Home";
+            this.loanHomeBtn.UseVisualStyleBackColor = true;
+            this.loanHomeBtn.Click += new System.EventHandler(this.loanHomeBtn_Click);
+            // 
+            // modLoanBtn
+            // 
+            this.modLoanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.modLoanBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.modLoanBtn.Location = new System.Drawing.Point(44, 235);
+            this.modLoanBtn.Name = "modLoanBtn";
+            this.modLoanBtn.Size = new System.Drawing.Size(100, 23);
+            this.modLoanBtn.TabIndex = 11;
+            this.modLoanBtn.Text = "Modify loan date";
+            this.modLoanBtn.UseVisualStyleBackColor = true;
+            this.modLoanBtn.Click += new System.EventHandler(this.modLoanBtn_Click);
+            // 
             // LibraryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 741);
+            this.Controls.Add(this.bookPanel);
+            this.Controls.Add(this.loanPanel);
             this.Controls.Add(this.authorPanel);
             this.Controls.Add(this.memberPanel);
             this.Controls.Add(this.addBookPanel);
-            this.Controls.Add(this.bookPanel);
             this.Controls.Add(this.mainPanel);
             this.Name = "LibraryForm";
             this.Text = "Library";
@@ -608,6 +674,7 @@
             this.memberPanel.PerformLayout();
             this.authorPanel.ResumeLayout(false);
             this.authorPanel.PerformLayout();
+            this.loanPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -657,11 +724,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox authorNameTb;
         private System.Windows.Forms.TextBox bookLoanTb;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label bookLabel;
         private System.Windows.Forms.TextBox memberLoanTb;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button loanBtn;
+        private System.Windows.Forms.Label memberLabel;
         private System.Windows.Forms.Button returnLoanBtn;
+        private System.Windows.Forms.Panel loanPanel;
+        private System.Windows.Forms.Button createLoanBtn;
+        private System.Windows.Forms.Button loanBtn;
+        private System.Windows.Forms.Button loanHomeBtn;
+        private System.Windows.Forms.ListBox loanLb;
+        private System.Windows.Forms.Button modLoanBtn;
     }
 }
 

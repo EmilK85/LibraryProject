@@ -58,5 +58,11 @@ namespace Library.Services
                 Updated(this, e);
             }
         }
+
+        public void ModLoan(Loan item)
+        {
+            OnUpdated(this, new EventArgs());
+            _loanRepository.ModLoan(item);
+        }
     }
 }

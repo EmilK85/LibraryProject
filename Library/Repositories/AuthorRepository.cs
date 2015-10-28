@@ -28,6 +28,8 @@ namespace Library.Repositories
         public Author Find(int id)
         {
             Author author = new Author();
+            author.books = new List<Book>();
+            author.Name = "Error code 23423";
             foreach (Author a in _context.Authors)
             {
                 if (a.AuthorId == id)
@@ -35,7 +37,21 @@ namespace Library.Repositories
                     author = a;
                 }
             }
+
             return author;      
+        }
+
+        public bool FindName(string name)
+        {
+            foreach (Author a in _context.Authors)
+            {
+                if (a.Name == name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void Edit(Author item)
