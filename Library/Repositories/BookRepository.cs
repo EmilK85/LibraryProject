@@ -29,7 +29,7 @@ namespace Library.Repositories
         public void AddCopy(Book item)
         {
             int id = item.Id;
-            foreach(Book b in _context.Books.ToList())
+            foreach(Book b in _context.Books)
             {
                 if(id == b.Id)
                 {
