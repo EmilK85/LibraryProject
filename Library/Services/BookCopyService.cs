@@ -40,5 +40,10 @@ namespace Library.Services
                 Updated(this, e);
             }
         }
+
+        public List<BookCopy> AvailableBooks()
+        {
+            return _bookCopyRepository.AvailableBooks();
+        }
     }
 }

@@ -184,20 +184,10 @@ namespace Library
                 bookLoanTb.Visible = false;
                 createLoanBtn.Visible = false;
 
-                List<BookCopy> bCopyList = new List<BookCopy>();
-                foreach (BookCopy bCopy in _bookCopyService.All())
+                List<BookCopy> bCopyList = _bookCopyService.AvailableBooks();
+                foreach (BookCopy bCopy in bCopyList)
                 {
-                    bCopyList.Add(bCopy);
-                }
-
-                List<BookCopy> sortedList = bCopyList.OrderBy(b => b.book.Id).ToList();
-
-                foreach (BookCopy bCopy in sortedList)
-                {
-                    if (bCopy.IsLoaned == false)
-                    {
-                        lbBooks.Items.Add(bCopy);
-                    }
+                    lbBooks.Items.Add(bCopy);
                 }
             }
         }
@@ -227,38 +217,16 @@ namespace Library
         {
             if (!mainPanel.Visible)
             {
-                int id;
                 string author = addBookAuthorTb.Text;
-                Author _author = new Author();
-                
-                if(!_authorService.FindName(author))
-                {
-                    _author.Name = author;
-                    _author.books = new List<Book>();
-                    _authorService.Add(_author);
-                }
-                else
-                {
-                    foreach(Author a in _authorService.All())
-                    {
-                        if( a.Name == author)
-                        {
-                             id = a.AuthorId;
-                             _author = _authorService.Find(id);
-                        }
-                    }
-                }
-
                 string title = addBookTitleTb.Text;
-                long isbn = long.Parse(addBookIsbnTb.Text);
-                int nrOfCopies = 0;
+                string isbn = addBookIsbnTb.Text;
                 string description = addBookDescTb.Text;
 
-                Book addBook = new Book(_author, title, description, isbn, nrOfCopies);
-                _author.books.Add(addBook);
-                _bookService.Add(addBook);
-                
-
+                if(!_bookService.TryAdd(author, title, isbn, description))
+                {
+                    MessageBox.Show("You forgot to enter information");
+                }
+               
                 addBookAuthorTb.Text = "";
                 addBookTitleTb.Text = "";
                 addBookIsbnTb.Text = "";
@@ -362,17 +330,8 @@ namespace Library
                 var item = memberLb.SelectedItem;
                 if (item is Loan)
                 {
-                    if (_loanService.ReturnLoan((Loan)item) == 0)
-                    {
-                        MessageBox.Show("Loan returned!");
-                    }
-                    else
-                    {
-                        int days = _loanService.ReturnLoan((Loan)item);
-                        int fee = days * 10;
-                        MessageBox.Show("You owe " + fee + " kr!");
-                    }
-                    _loanService.Remove((Loan)item);
+                    string message = _loanService.ReturnLoan((Loan)item);
+                    MessageBox.Show(message);
                 }
             }
         }
@@ -382,39 +341,17 @@ namespace Library
             if (!mainPanel.Visible)
             {
                 string name = memberLoanTb.Text;
-                string book = bookLoanTb.Text;
-                int bookId;
-                int memberId;
-                BookCopy bCopy = new BookCopy();
-                Member member = new Member();
+                string title = bookLoanTb.Text;
 
-                foreach (Book b in _bookService.All())
-                {
-                    if (b.Title == book)
-                    {
-                        bookId = b.Id;
-                        bCopy = _bookCopyService.Find(bookId);
-                    }
-                }
+                string message = _loanService.CreateLoan(name, title);
 
-                foreach (Member m in _memberService.All())
+                if(message == "Success")
                 {
-                    if (m.Name == name)
-                    {
-                        memberId = m.MemberId;
-                        member = _memberService.Find(memberId);
-                    }
-                }
-
-                if (bCopy.book.NrOfCopies != 0)
-                {
-                    Loan loan = new Loan(bCopy, member);
-                    _loanService.Add(loan);
                     _bookService.OnUpdated(this, new EventArgs());
                 }
                 else
                 {
-                    MessageBox.Show("Book or Member doesn't exist or not enough book copies");
+                    MessageBox.Show(message);
                 }
             }
         }

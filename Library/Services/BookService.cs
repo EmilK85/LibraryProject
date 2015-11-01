@@ -41,6 +41,19 @@ namespace Library.Services
             return _bookRepository.Find(id);
         }
 
+        public bool TryAdd(string author, string title, string isbn, string description)
+        {
+            if(_bookRepository.TryAdd(author, title, isbn, description))
+            {
+                OnUpdated(this, new EventArgs());
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void OnUpdated(object sender, EventArgs e)
         {
             if (Updated != null)

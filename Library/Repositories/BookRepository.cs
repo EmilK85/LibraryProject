@@ -26,6 +26,53 @@ namespace Library.Repositories
             _context.SaveChanges();
         }
 
+        public bool TryAdd(string author, string title, string isbn, string description)
+        {
+            if (author == "")
+            {
+                return false;
+            }
+
+            if (title == "")
+            {
+                return false;
+            }
+
+            if (isbn == "")
+            {
+                return false;
+            }
+
+            if (description == "")
+            {
+                return false;
+            }
+
+
+            Author _author = new Author();
+
+            var item = _context.Authors.SingleOrDefault(a => a.Name == author);
+
+            if (item is Author)
+            {
+                _author = (Author)item;
+            }
+            else
+            {
+                _author.Name = author;
+                _author.books = new List<Book>();
+                _context.Authors.Add(_author);
+            }
+
+            long Isbn = long.Parse(isbn);
+            int nrOfCopies = 0;
+            Book book = new Book(_author, title, description, Isbn, nrOfCopies);
+            _author.books.Add(book);
+            Add(book);
+
+            return true;
+        }
+
         public void AddCopy(Book item)
         {
             int id = item.Id;
@@ -45,15 +92,8 @@ namespace Library.Repositories
 
         public Book Find(int id)
         {
-            Book book = new Book();
-            foreach (Book b in _context.Books)
-            {
-                if (b.Id== id)
-                {
-                    book = b;
-                }
-            }
-            return book;
+            Book book = _context.Books.SingleOrDefault(b => b.Id == id);
+            return book; 
         }
 
         public void Edit(Book item)

@@ -27,20 +27,8 @@ namespace Library.Repositories
 
         public BookCopy Find(int id)
         {
-            BookCopy bookCopy = new BookCopy();
-            foreach (BookCopy bCopy in _context.BookCopies)
-            {
-                if(bCopy.book.Id == id)
-                {
-                    if (bCopy.IsLoaned != true)
-                    {
-                        bookCopy = bCopy;
-                        return bookCopy;
-                    }
-                }
-            }
-
-            return bookCopy;
+            BookCopy bookCopy = _context.BookCopies.SingleOrDefault(b => b.BookCopyId == id);
+            return bookCopy; 
         }
 
         public void Edit(BookCopy item)
@@ -50,6 +38,16 @@ namespace Library.Repositories
         public IEnumerable<BookCopy> All()
         {
             return _context.BookCopies.ToList();
+        }
+
+        public List<BookCopy> AvailableBooks()
+        {
+            List<BookCopy> bCopyList = new List<BookCopy>();
+            List<BookCopy> sortedList = new List<BookCopy>();
+
+            bCopyList = _context.BookCopies.ToList();
+            sortedList = bCopyList.Where(item => !item.IsLoaned).OrderBy(b => b.book.Id).ToList();
+            return sortedList;
         }
     }
 }

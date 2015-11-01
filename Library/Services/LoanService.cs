@@ -40,7 +40,12 @@ namespace Library.Services
             return _loanRepository.Find(id);
         }
 
-        public int ReturnLoan(Loan loan)
+        public string CreateLoan(string name, string title)
+        {
+            return _loanRepository.CreateLoan(name, title);
+        }
+
+        public string ReturnLoan(Loan loan)
         {
             OnUpdated(this, new EventArgs());
             return _loanRepository.ReturnLoan(loan);

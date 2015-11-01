@@ -27,31 +27,8 @@ namespace Library.Repositories
 
         public Author Find(int id)
         {
-            Author author = new Author();
-            author.books = new List<Book>();
-            author.Name = "Error code 23423";
-            foreach (Author a in _context.Authors)
-            {
-                if (a.AuthorId == id)
-                {
-                    author = a;
-                }
-            }
-
+            Author author = _context.Authors.SingleOrDefault(a => a.AuthorId == id);
             return author;      
-        }
-
-        public bool FindName(string name)
-        {
-            foreach (Author a in _context.Authors)
-            {
-                if (a.Name == name)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         public void Edit(Author item)
@@ -66,13 +43,7 @@ namespace Library.Repositories
         public List<Book> BooksByAuthor(string name)
         {
             List<Book> bList = new List<Book>();
-            foreach(Author a in _context.Authors)
-            {
-                if(a.Name == name)
-                {
-                    bList = a.books;
-                }
-            }
+            bList = _context.Books.Where(a => a.author.Name == name).ToList();
             return bList;
         }
     }

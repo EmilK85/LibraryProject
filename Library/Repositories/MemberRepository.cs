@@ -27,14 +27,7 @@ namespace Library.Repositories
 
         public Member Find(int id)
         {
-            Member member = new Member();
-            foreach (Member m in _context.Members)
-            {
-                if (m.MemberId == id)
-                {
-                    member = m;
-                }
-            }
+            Member member = _context.Members.SingleOrDefault(m => m.MemberId == id);
             return member; 
         }
 
@@ -50,13 +43,7 @@ namespace Library.Repositories
         public List<Loan> LoansByMember(string name)
         {
             List<Loan> loanList = new List<Loan>();
-            foreach(Member m in _context.Members)
-            {
-                if(m.Name == name)
-                {
-                    loanList = m.loans;
-                }
-            }
+            loanList = _context.Loans.Where(item => item.member.Name == name).ToList();
             return loanList;
         }
     }

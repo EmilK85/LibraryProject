@@ -29,14 +29,7 @@ namespace Library.Repositories
 
         public Loan Find(int id)
         {
-            Loan loan = new Loan();
-            foreach (Loan l in _context.Loans)
-            {
-                if (l.LoanId == id)
-                {
-                    loan = l;
-                }
-            }
+            Loan loan = _context.Loans.SingleOrDefault(l => l.LoanId == id);
             return loan; 
         }
 
@@ -49,33 +42,68 @@ namespace Library.Repositories
             return _context.Loans.ToList();
         }
 
-        public int ReturnLoan(Loan loan)
+        public string ReturnLoan(Loan loan)
         {
             loan.TimeOfReturn = DateTime.Now;
+            Remove(loan);
 
             if (DateTime.Now <= loan.DueDate)
             {
-                return 0;
+                return "Loan returned";
             }
             else
             {
                 double differance = (DateTime.Now.Date - loan.DueDate.Date).TotalDays;
                 int diff = Convert.ToInt32(differance);
-                return diff;
+                diff = diff * 10;
+
+                return "You owe " + diff.ToString() + " kr!";
             }
         }
 
         public List<Loan> LoansByMember(string name)
         {
             List<Loan> loanList = new List<Loan>();
-            foreach(Loan l in _context.Loans)
+            loanList = _context.Loans.Where(item => item.member.Name == name).ToList();
+            return loanList;
+        }
+
+        public string CreateLoan(string name, string title)
+        {
+            BookCopy bCopy = new BookCopy();
+            Member member = new Member();
+
+            foreach(BookCopy b in _context.BookCopies)
             {
-                if(l.member.Name == name)
+                if(b.book.Title == title)
                 {
-                    loanList.Add(l);
+                    if(!b.IsLoaned)
+                    {
+                        bCopy = b;
+                    }
                 }
             }
-            return loanList;
+
+            foreach (Member m in _context.Members)
+            {
+                if (m.Name == name)
+                {
+                    member = m;
+                }
+            }
+
+            if(member.Name != name)
+            {
+                return "No such member exist";
+            }
+
+            if(bCopy.book.Title != title)
+            {
+                return "Book not available";
+            }
+
+            Add(new Loan(bCopy, member));
+            return "Success";
         }
 
         public void ModLoan(Loan item)
