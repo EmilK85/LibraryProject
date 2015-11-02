@@ -35,6 +35,11 @@ namespace Library.Services
             return _memberRepository.Find(id);
         }
 
+        public void RemoveLoan(Loan item, string name)
+        {
+            _memberRepository.RemoveLoan(item, name);
+        }
+
         public void OnUpdated(object sender, EventArgs e)
         {
             if (Updated != null)

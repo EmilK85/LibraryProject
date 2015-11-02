@@ -45,6 +45,8 @@ namespace Library.Repositories
         public string ReturnLoan(Loan loan)
         {
             loan.TimeOfReturn = DateTime.Now;
+            loan.bookCopy.IsLoaned = false;
+            loan.bookCopy.IsReturned = true;
             Remove(loan);
 
             if (DateTime.Now <= loan.DueDate)

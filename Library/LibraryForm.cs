@@ -272,8 +272,6 @@ namespace Library
                 {
                     memberLb.Items.Add(l);
                 }
-                //searchMemberTb.Text = "";
-                //searchMemberTb.Focus();
             }
         }
 
@@ -328,10 +326,19 @@ namespace Library
             if (!mainPanel.Visible)
             {
                 var item = memberLb.SelectedItem;
+                string memberName = searchMemberTb.Text;
                 if (item is Loan)
                 {
                     string message = _loanService.ReturnLoan((Loan)item);
+                    _memberService.RemoveLoan((Loan)item, memberName);
                     MessageBox.Show(message);
+                }
+                memberLb.Items.Clear();
+                memberName = searchMemberTb.Text;
+                List<Loan> loanList = _loanService.LoansByMember(memberName);
+                foreach (Loan l in loanList)
+                {
+                    memberLb.Items.Add(l);
                 }
             }
         }

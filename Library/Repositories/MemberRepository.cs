@@ -46,5 +46,11 @@ namespace Library.Repositories
             loanList = _context.Loans.Where(item => item.member.Name == name).ToList();
             return loanList;
         }
+
+        public void RemoveLoan(Loan item, string name)
+        {
+            List<Loan> loanList = LoansByMember(name);
+            loanList.Remove(item);
+        }
     }
 }

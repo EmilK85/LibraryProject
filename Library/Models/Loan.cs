@@ -22,6 +22,7 @@ namespace Library.Models
             this.TimeOfLoan = DateTime.Now;
             this.DueDate = DateTime.Now.AddDays(15);
             bookCopy.IsLoaned = true;
+            bookCopy.IsReturned = false;
             this.bookCopy = new BookCopy();
             this.member = new Member();
         }
