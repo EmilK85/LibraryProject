@@ -1,4 +1,7 @@
-﻿using Library.Models;
+﻿//Emil Kronström & Love Hermansson
+//OOP2
+//02/11 -15
+using Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

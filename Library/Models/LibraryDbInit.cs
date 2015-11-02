@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Emil Kronström & Love Hermansson
+//OOP2
+//02/11 -15
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;

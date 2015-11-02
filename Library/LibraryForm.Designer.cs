@@ -54,6 +54,7 @@
             this.bookAuthorLabel = new System.Windows.Forms.Label();
             this.addBookAuthorTb = new System.Windows.Forms.TextBox();
             this.memberPanel = new System.Windows.Forms.Panel();
+            this.modLoanBtn = new System.Windows.Forms.Button();
             this.returnLoanBtn = new System.Windows.Forms.Button();
             this.pNumberTb = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -75,7 +76,6 @@
             this.loanPanel = new System.Windows.Forms.Panel();
             this.loanLb = new System.Windows.Forms.ListBox();
             this.loanHomeBtn = new System.Windows.Forms.Button();
-            this.modLoanBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.bookPanel.SuspendLayout();
             this.addBookPanel.SuspendLayout();
@@ -116,6 +116,7 @@
             this.loanBtn.TabIndex = 4;
             this.loanBtn.Text = "Loan";
             this.loanBtn.UseVisualStyleBackColor = true;
+            this.loanBtn.Visible = false;
             this.loanBtn.Click += new System.EventHandler(this.loanBtn_Click);
             // 
             // authorBtn
@@ -423,6 +424,18 @@
             this.memberPanel.TabIndex = 4;
             this.memberPanel.Visible = false;
             // 
+            // modLoanBtn
+            // 
+            this.modLoanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.modLoanBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.modLoanBtn.Location = new System.Drawing.Point(44, 235);
+            this.modLoanBtn.Name = "modLoanBtn";
+            this.modLoanBtn.Size = new System.Drawing.Size(100, 23);
+            this.modLoanBtn.TabIndex = 11;
+            this.modLoanBtn.Text = "Modify loan date";
+            this.modLoanBtn.UseVisualStyleBackColor = true;
+            this.modLoanBtn.Click += new System.EventHandler(this.modLoanBtn_Click);
+            // 
             // returnLoanBtn
             // 
             this.returnLoanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -639,18 +652,6 @@
             this.loanHomeBtn.Text = "Home";
             this.loanHomeBtn.UseVisualStyleBackColor = true;
             this.loanHomeBtn.Click += new System.EventHandler(this.loanHomeBtn_Click);
-            // 
-            // modLoanBtn
-            // 
-            this.modLoanBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.modLoanBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.modLoanBtn.Location = new System.Drawing.Point(44, 235);
-            this.modLoanBtn.Name = "modLoanBtn";
-            this.modLoanBtn.Size = new System.Drawing.Size(100, 23);
-            this.modLoanBtn.TabIndex = 11;
-            this.modLoanBtn.Text = "Modify loan date";
-            this.modLoanBtn.UseVisualStyleBackColor = true;
-            this.modLoanBtn.Click += new System.EventHandler(this.modLoanBtn_Click);
             // 
             // LibraryForm
             // 
